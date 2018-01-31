@@ -22,10 +22,10 @@ public class Robot_Drivetrain extends Subsystem {
 	
 	public void InitializeDrive() {
 		//Inversion
-		flDrive.setInverted(false);
-		frDrive.setInverted(false);
-		blDrive.setInverted(false);
-		brDrive.setInverted(false);
+		flDrive.setInverted(true);
+		frDrive.setInverted(true);
+		blDrive.setInverted(true);
+		brDrive.setInverted(true);
 		//Follow
 		blDrive.follow(flDrive);
 		brDrive.follow(frDrive);

@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
+
 /**
  *
  */
@@ -22,10 +23,10 @@ public class Robot_Drivetrain extends Subsystem {
 	
 	public void InitializeDrive() {
 		//Inversion
-		flDrive.setInverted(false);
-		frDrive.setInverted(false);
-		blDrive.setInverted(false);
-		brDrive.setInverted(false);
+		frDrive.setInverted(false); //right
+		flDrive.setInverted(false); //left
+		brDrive.setInverted(false); //right
+		blDrive.setInverted(false); //left 
 		//Follow
 		blDrive.follow(flDrive);
 		brDrive.follow(frDrive);
@@ -41,7 +42,7 @@ public class Robot_Drivetrain extends Subsystem {
     }
     
     public void teleopDrive(XboxController Control) {
-    	WCD.arcadeDrive(Control.getRawAxis(1), Control.getRawAxis(5), false);
+    	WCD.arcadeDrive(Control.getRawAxis(1), Control.getRawAxis(4), false);
     }
 }
 

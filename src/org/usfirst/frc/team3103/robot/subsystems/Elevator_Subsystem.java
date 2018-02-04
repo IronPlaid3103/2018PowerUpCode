@@ -16,6 +16,7 @@ public class Elevator_Subsystem extends Subsystem {
 
     public void initializeElevator() {
     	//Invert motors
+    	
         elevatorMotor1.setInverted(false);
         elevatorMotor2.setInverted(false);
         

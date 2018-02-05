@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.usfirst.frc.team3103.robot.subsystems.Elevator_Subsystem;
 //import ;
 import org.usfirst.frc.team3103.robot.subsystems.Robot_Drivetrain;
 
@@ -27,6 +29,7 @@ public class Robot extends TimedRobot {
 			= new ExampleSubsystem();*/
 	public static final Robot_Drivetrain mainDrive = new Robot_Drivetrain();
 	public static OI m_oi;
+	public static final Elevator_Subsystem elevator = new Elevator_Subsystem();
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();

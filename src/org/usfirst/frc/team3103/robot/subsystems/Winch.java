@@ -22,6 +22,7 @@ public class Winch extends Subsystem {
     	wMotor2.set1
     	
     }
+    
     	
     public void WinchInit() {
     	wMotor1.setInverted(false);

@@ -1,5 +1,9 @@
 package org.usfirst.frc.team3103.robot.subsystems;
 
+import org.usfirst.frc.team3103.robot.RobotMap;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -19,7 +23,7 @@ public class Winch extends Subsystem {
     }
 
     public void climb() {
-    	wMotor2.set1
+    	wMotor2.set(1);
     	
     }
     

@@ -21,7 +21,7 @@ public class arcade_Drive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.mainDrive.teleopDrive(Robot.m_oi.getXboxController()); 
+    	Robot.mainDrive.teleopDrive(Robot.m_oi.getJoystickController()); 
     }
 
     // Make this return true when this Command no longer needs to run execute()

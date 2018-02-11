@@ -5,6 +5,7 @@ import org.usfirst.frc.team3103.robot.commands.arcade_Drive;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -41,8 +42,13 @@ public class Robot_Drivetrain extends Subsystem {
     	setDefaultCommand(new arcade_Drive());
     }
     
-    public void teleopDrive(XboxController Control) {
-    	WCD.arcadeDrive(Control.getRawAxis(1), Control.getRawAxis(4), false);
+    public void teleopDrive(Joystick joystick) {
+    	WCD.arcadeDrive(joystick.getRawAxis(1), joystick.getRawAxis(4), false);
+    }
+    
+    public void random(double left, double right) {
+    	flDrive.set(left);
+    	frDrive.set(right);
     }
 }
 

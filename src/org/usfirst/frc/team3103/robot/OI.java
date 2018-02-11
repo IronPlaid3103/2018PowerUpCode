@@ -7,17 +7,38 @@
 
 package org.usfirst.frc.team3103.robot;
 
+import org.usfirst.frc.team3103.robot.commands.AutoAim;
+
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	XboxController Drivecontrol = new XboxController(0);
+	Joystick driveControl = new Joystick(0);
 	
-	public XboxController getXboxController() {
-		return Drivecontrol;
+	
+	public OI()
+	{
+		//driveControl.getBumper(Hand.kRight).whenPressed(new AutoAim());
+		//boolean rightBumper = driveControl.getBumper(Hand.kRight); 
+		Button button6 = new JoystickButton(driveControl,6);
+		
+		
+		/*if (rightBumper) {
+			new AutoAim();
+		}
+		*/
+		button6.whenPressed(new AutoAim());
+	}
+	
+	public Joystick getJoystickController() {
+		return driveControl;
 	}
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a

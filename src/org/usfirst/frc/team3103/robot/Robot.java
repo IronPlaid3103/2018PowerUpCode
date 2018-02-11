@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3103.robot.subsystems.Elevator_Subsystem;
+import org.usfirst.frc.team3103.robot.subsystems.LimeLight;
 //import ;
 import org.usfirst.frc.team3103.robot.subsystems.Robot_Drivetrain;
 
@@ -30,7 +31,8 @@ public class Robot extends TimedRobot {
 	public static final Robot_Drivetrain mainDrive = new Robot_Drivetrain();
 	public static OI m_oi;
 	public static final Elevator_Subsystem elevator = new Elevator_Subsystem();
-
+	public static final LimeLight camera = new LimeLight();
+	
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 

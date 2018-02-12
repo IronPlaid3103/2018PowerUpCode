@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class AutoAim extends Command {
 	
-	XboxController driveControl = new XboxController(0);
+	//XboxController driveControl = new XboxController(0);
 	
     public AutoAim() {
         // Use requires() here to declare subsystem dependencies
@@ -28,7 +28,9 @@ public class AutoAim extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.camera.table.getEntry("ledMode").setValue(-2);
+    	//Robot.camera.table.getEntry("ledMode").setValue(2);
+    	
+    	Robot.camera.lightFlash();
     	
     	SmartDashboard.putNumber("initialize", 10);
 
@@ -38,13 +40,16 @@ public class AutoAim extends Command {
     protected void execute() {
     	SmartDashboard.putNumber("execute", 10);
 
-        Robot.camera.table.getEntry("ledMode").setValue(0);
-        Robot.mainDrive.random(Robot.camera.aimLeft(), 0.2);
+        //Robot.camera.table.getEntry("ledMode").setValue(0);
+        //Robot.mainDrive.random(Robot.camera.aimLeft(), 0.2);
+    	
+    	Robot.camera.lightOn();
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	
+    	/*
     	Button button6 = new JoystickButton(driveControl,6);
     	
     	SmartDashboard.putNumber("hello finish", 10);
@@ -52,9 +57,22 @@ public class AutoAim extends Command {
     	if(button6.get() == false) {
             Robot.camera.table.getEntry("ledMode").setValue(1);
     		return true;
-    	}
+    	} 
+    	*/
     	
-        return false;
+    	//boolean rightBumper = driveControl.getBumper(Hand.kLeft); 		
+		
+    	//boolean rightBumper = driveControl.getRawButton(5);
+    	
+		/*if (rightBumper == false) {
+            Robot.camera.table.getEntry("ledMode").setValue(1);
+			return true;
+		}
+		*/
+    	
+    	
+    	
+        return false; 
     }
 
     // Called once after isFinished returns true

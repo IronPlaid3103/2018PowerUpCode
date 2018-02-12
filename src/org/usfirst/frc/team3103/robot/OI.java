@@ -20,24 +20,25 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	Joystick driveControl = new Joystick(0);
-	
+	//Joystick driveControl = new Joystick(0);
+	XboxController driveControl = new XboxController(0);
 	
 	public OI()
 	{
 		//driveControl.getBumper(Hand.kRight).whenPressed(new AutoAim());
-		//boolean rightBumper = driveControl.getBumper(Hand.kRight); 
-		Button button6 = new JoystickButton(driveControl,6);
+		//boolean rightBumper = driveControl.getBumper(Hand.kLeft); 
+		//Button button6 = new JoystickButton(driveControl,6);
+    	boolean rightBumper = driveControl.getRawButton(5);
+
 		
-		
-		/*if (rightBumper) {
+		if (rightBumper) {
 			new AutoAim();
 		}
-		*/
-		button6.whenPressed(new AutoAim());
+		
+		//button6.whenPressed(new AutoAim());
 	}
 	
-	public Joystick getJoystickController() {
+	public XboxController getJoystickController() {
 		return driveControl;
 	}
 	//// CREATING BUTTONS

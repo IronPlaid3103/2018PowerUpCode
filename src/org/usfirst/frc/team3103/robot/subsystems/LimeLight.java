@@ -2,6 +2,10 @@ package org.usfirst.frc.team3103.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
+
+import org.usfirst.frc.team3103.robot.Robot;
+import org.usfirst.frc.team3103.robot.commands.AutoAim;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -36,9 +40,23 @@ public class LimeLight extends Subsystem {
 		double steering_adjust = kP * x;
 	}
 	
+	public void lightOn() {
+        Robot.camera.table.getEntry("ledMode").setValue(0);
+	}
+	
+	public void lightOff() {
+        Robot.camera.table.getEntry("ledMode").setValue(1);
+	}
+	
+	public void lightFlash() {
+        Robot.camera.table.getEntry("ledMode").setValue(2);
+	}
+	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	
+    	//setDefaultCommand(new AutoAim());
     }
 }
 

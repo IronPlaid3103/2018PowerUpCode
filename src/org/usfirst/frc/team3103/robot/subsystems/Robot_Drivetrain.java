@@ -42,8 +42,8 @@ public class Robot_Drivetrain extends Subsystem {
     	setDefaultCommand(new arcade_Drive());
     }
     
-    public void teleopDrive(Joystick joystick) {
-    	WCD.arcadeDrive(joystick.getRawAxis(1), joystick.getRawAxis(4), false);
+    public void teleopDrive(XboxController xboxController) {
+    	WCD.arcadeDrive(xboxController.getRawAxis(1), xboxController.getRawAxis(4), false);
     }
     
     public void random(double left, double right) {

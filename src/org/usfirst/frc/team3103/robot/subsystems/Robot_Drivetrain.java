@@ -37,6 +37,7 @@ public class Robot_Drivetrain extends Subsystem {
 		blDrive.follow(flDrive);
 		brDrive.follow(frDrive);
 		
+		//gyro.setFusedHeading(0.0, 5000);
 		
     	WCD.setSafetyEnabled(false);
 	}
@@ -52,6 +53,10 @@ public class Robot_Drivetrain extends Subsystem {
         
     
     public void teleopDrive(Joystick joystick) {
+  //  	double testAngle  = gyro.getFusedHeading();
+    	double testAngle = gyro.getAbsoluteCompassHeading();
+		System.out.println("Current heading: " + testAngle);		
+		
     	WCD.arcadeDrive(joystick.getRawAxis(1), joystick.getRawAxis(4), false);
     }
     
@@ -73,7 +78,9 @@ public class Robot_Drivetrain extends Subsystem {
     
     //get angle from gyro
     public double getYaw() {
-    	return gyro.getFusedHeading();
+    	gyro.getYawPitchRoll(ypr);
+    	return ypr[0];
+    	//return gyro.getFusedHeading();
     }
     
     //deadband
@@ -93,14 +100,33 @@ public class Robot_Drivetrain extends Subsystem {
 			return +peak;
 		return value;
 	}
+	
+	double MaxCorrection(double forwardThrot, double scalor) {
+		/* make it positive */
+		if(forwardThrot < 0) {forwardThrot = -forwardThrot;}
+		/* max correction is the current forward throttle scaled down */
+		forwardThrot *= scalor;
+		/* ensure caller is allowed at least 10% throttle,
+		 * regardless of forward throttle */
+		if(forwardThrot < 0.10)
+			return 0.10;
+		return forwardThrot;
+	}
+		
     
     public void turnToTargetAngle(double target, Joystick joystick) {
     	System.out.println("turntotargetangle - test");
     	
-    	double currentAngle = gyro.getFusedHeading();
+    	gyro.getYawPitchRoll(ypr);
+    	
+    	double currentAngle = ypr[0];
+    	
+    	System.out.println("current angle = " + currentAngle);
     	gyro.getRawGyro(xyz_dps);
         double currentAngularRate = xyz_dps[2];
     	double forwardThrottle = joystick.getRawAxis(1) * -1.0;
+		double maxThrot = MaxCorrection(forwardThrottle, kMaxCorrectionRatio);
+    	
     	System.out.println("get raw axis 1 = " + joystick.getRawAxis(1));
     	System.out.println("forwardThrottle = " + forwardThrottle);
     	
@@ -134,10 +160,7 @@ public class Robot_Drivetrain extends Subsystem {
     	else {
     		flDrive.set(ControlMode.PercentOutput, 0);
     		frDrive.set(ControlMode.PercentOutput, 0);
-    	}
-    	
-    		
+    	}    
     }
-    
 }
 

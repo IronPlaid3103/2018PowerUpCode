@@ -23,11 +23,12 @@ public class turnAngle_command extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.mainDrive.turnToTargetAngle(45.0, Robot.m_oi.getJoystickController()); 
+    	System.out.println("Yaw = " + Robot.mainDrive.getYaw());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(Robot.mainDrive.getYaw() == 45.0) {
+    	if(Robot.mainDrive.getYaw() == Math.abs(45.0)) {
     		return true;
     	}
         return false;

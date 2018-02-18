@@ -8,6 +8,7 @@
 package org.usfirst.frc.team3103.robot;
 
 import org.usfirst.frc.team3103.robot.commands.AutoAim;
+import org.usfirst.frc.team3103.robot.commands.turnAngle_command;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.Joystick;
@@ -20,25 +21,37 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	//Joystick driveControl = new Joystick(0);
-	XboxController driveControl = new XboxController(0);
+	Joystick driveControl = new Joystick(0);
+	//XboxController driveControl = new XboxController(0);
+	//boolean buttonPressed = driveControl.getRawButtonPressed(5);
 	
 	public OI()
 	{
+		//Joystick driveControl = new Joystick(0);
+
 		//driveControl.getBumper(Hand.kRight).whenPressed(new AutoAim());
 		//boolean rightBumper = driveControl.getBumper(Hand.kLeft); 
-		//Button button6 = new JoystickButton(driveControl,6);
-    	boolean rightBumper = driveControl.getRawButton(5);
+		Button button6 = new JoystickButton(driveControl, 6);
+		Button button5 = new JoystickButton(driveControl, 5);
+    	
+		//driveControl.getRawButton(5);
 
+    	/* if (buttonPressed) {
+    		
+    		System.out.println("test - oi");
+    		
+    		new AutoAim();
+    		
+    	} */
 		
-		if (rightBumper) {
-			new AutoAim();
-		}
+		//new JoystickButton(driveControl, 6).whenPressed(new AutoAim());
 		
-		//button6.whenPressed(new AutoAim());
+		
+		button5.whenPressed(new turnAngle_command());
+		button6.whenPressed(new AutoAim());
 	}
 	
-	public XboxController getJoystickController() {
+	public Joystick getJoystickController() {
 		return driveControl;
 	}
 	//// CREATING BUTTONS

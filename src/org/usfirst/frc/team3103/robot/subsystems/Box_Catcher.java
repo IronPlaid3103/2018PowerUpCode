@@ -4,19 +4,22 @@ import org.usfirst.frc.team3103.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
 public class Box_Catcher extends Subsystem {
-	WPI_TalonSRX mover = new WPI_TalonSRX(RobotMap.actuatingBoxCatcherMototor);
+	//WPI_TalonSRX mover = new WPI_TalonSRX(RobotMap.actuatingBoxCatcherMotor);
 	WPI_TalonSRX catcher1 = new WPI_TalonSRX(RobotMap.boxCatcherRoller1);
 	WPI_TalonSRX catcher2 = new WPI_TalonSRX(RobotMap.boxCatcherRoller2);
 	
+	//private Solenoid piston = new Solenoid(1, 1);
+	
 	public void Box_CatcherInit() {
 		//inversion
-		mover.setInverted(false);
+		//mover.setInverted(false);
 		catcher1.setInverted(false);
 		catcher2.setInverted(false);
 		//follow
@@ -33,11 +36,11 @@ public class Box_Catcher extends Subsystem {
     }
     	
     public void open_Catcher() {
-    	mover.set(1);
+    //	piston.set(true);
     	
     }
     public void close_Catcher() {
-    	mover.set(-1);
+    //	piston.set(false);
     	
     }
     public void intake_Box() {

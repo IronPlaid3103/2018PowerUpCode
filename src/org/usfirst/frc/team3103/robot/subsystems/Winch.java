@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Winch extends Subsystem {
-	WPI_TalonSRX wMotor1 = new WPI_TalonSRX(RobotMap.wMotor1); 
-	WPI_TalonSRX wMotor2 = new WPI_TalonSRX(RobotMap.wMotor2);
+    WPI_TalonSRX wMotor1 = new WPI_TalonSRX(RobotMap.wMotor1);
+    WPI_TalonSRX wMotor2 = new WPI_TalonSRX(RobotMap.wMotor2);
 	
     // Put methods for controlling this subsystem
     // here. Call these from Commands.

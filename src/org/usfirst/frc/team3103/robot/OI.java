@@ -8,6 +8,8 @@
 package org.usfirst.frc.team3103.robot;
 
 import org.usfirst.frc.team3103.robot.commands.AutoAim;
+import org.usfirst.frc.team3103.robot.commands.deliverBox_command;
+import org.usfirst.frc.team3103.robot.commands.getBox_command;
 import org.usfirst.frc.team3103.robot.commands.turnAngle_command;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -31,8 +33,10 @@ public class OI {
 
 		//driveControl.getBumper(Hand.kRight).whenPressed(new AutoAim());
 		//boolean rightBumper = driveControl.getBumper(Hand.kLeft); 
-		Button button6 = new JoystickButton(driveControl, 6);
-		Button button5 = new JoystickButton(driveControl, 5);
+		Button limelight = new JoystickButton(driveControl, 1);
+		Button turnAngle = new JoystickButton(driveControl, 2);
+		Button intake = new JoystickButton(driveControl, 5);
+		Button outtake = new JoystickButton(driveControl, 6);
     	
 		//driveControl.getRawButton(5);
 
@@ -47,8 +51,11 @@ public class OI {
 		//new JoystickButton(driveControl, 6).whenPressed(new AutoAim());
 		
 		
-		button5.whenPressed(new turnAngle_command());
-		button6.whenPressed(new AutoAim());
+		turnAngle.whenPressed(new turnAngle_command());
+		limelight.whenPressed(new AutoAim());
+		intake.whileHeld(new getBox_command());
+		outtake.whileHeld(new deliverBox_command());
+		
 	}
 	
 	public Joystick getJoystickController() {

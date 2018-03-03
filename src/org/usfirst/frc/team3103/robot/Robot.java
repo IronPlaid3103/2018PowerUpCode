@@ -13,10 +13,12 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team3103.robot.subsystems.Box_Catcher;
 import org.usfirst.frc.team3103.robot.subsystems.Elevator_Subsystem;
 import org.usfirst.frc.team3103.robot.subsystems.LimeLight;
 //import ;
 import org.usfirst.frc.team3103.robot.subsystems.Robot_Drivetrain;
+import org.usfirst.frc.team3103.robot.subsystems.Winch;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -32,6 +34,8 @@ public class Robot extends TimedRobot {
 	public static OI m_oi;
 	public static final Elevator_Subsystem elevator = new Elevator_Subsystem();
 	public static final LimeLight camera = new LimeLight();
+	public static final Box_Catcher gripper = new Box_Catcher();
+	public static final Winch winch = new Winch();
 	
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();

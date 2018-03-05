@@ -17,11 +17,12 @@ public class getBox_command extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.gripper.open_Catcher();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
+    	Robot.gripper.intake_Box();    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -31,6 +32,7 @@ public class getBox_command extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.gripper.close_Catcher();
     }
 
     // Called when another command which requires one or more of the same

@@ -15,7 +15,7 @@ public class Box_Catcher extends Subsystem {
 	WPI_TalonSRX catcher1 = new WPI_TalonSRX(RobotMap.boxCatcherRoller1);
 	WPI_TalonSRX catcher2 = new WPI_TalonSRX(RobotMap.boxCatcherRoller2);
 	
-	//private Solenoid piston = new Solenoid(1, 1);
+	private Solenoid piston = new Solenoid(1, 1);
 	
 	public void Box_CatcherInit() {
 		//inversion
@@ -36,11 +36,11 @@ public class Box_Catcher extends Subsystem {
     }
     	
     public void open_Catcher() {
-    //	piston.set(true);
+    	piston.set(true);
     	
     }
     public void close_Catcher() {
-    //	piston.set(false);
+    	piston.set(false);
     	
     }
     public void intake_Box() {

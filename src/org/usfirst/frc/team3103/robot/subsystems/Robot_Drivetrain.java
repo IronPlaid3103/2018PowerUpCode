@@ -37,6 +37,9 @@ public class Robot_Drivetrain extends Subsystem {
 		blDrive.follow(flDrive);
 		brDrive.follow(frDrive);
 		
+		//frDrive.follow(brDrive);
+		//flDrive.follow(blDrive);
+		
 		//gyro.setFusedHeading(0.0, 5000);
 		
     	WCD.setSafetyEnabled(false);
@@ -52,12 +55,16 @@ public class Robot_Drivetrain extends Subsystem {
     }
         
     
-    public void teleopDrive(Joystick joystick) {
+    public void teleopDrive(XboxController xboxController) {
   //  	double testAngle  = gyro.getFusedHeading();
     	double testAngle = gyro.getAbsoluteCompassHeading();
 		System.out.println("Current heading: " + testAngle);		
 		
-    	WCD.arcadeDrive(joystick.getRawAxis(1), joystick.getRawAxis(4), false);
+    	WCD.arcadeDrive(xboxController.getRawAxis(1), xboxController.getRawAxis(4), false);
+    }
+    
+    public void forward(double time) {
+    	
     }
     
     public void random(double left, double right) {
@@ -68,7 +75,7 @@ public class Robot_Drivetrain extends Subsystem {
    
     
     double kPgain = 0.04;
-    double kDgain = 0.04;
+    double kDgain = 0;
     double kMaxCorrectionRatio = 0.30;
     double targetAngle = 0;
     
@@ -114,7 +121,7 @@ public class Robot_Drivetrain extends Subsystem {
 	}
 		
     
-    public void turnToTargetAngle(double target, Joystick joystick) {
+    public void turnToTargetAngle(double target, XboxController xboxController) {
     	System.out.println("turntotargetangle - test");
     	
     	gyro.getYawPitchRoll(ypr);
@@ -124,17 +131,17 @@ public class Robot_Drivetrain extends Subsystem {
     	System.out.println("current angle = " + currentAngle);
     	gyro.getRawGyro(xyz_dps);
         double currentAngularRate = xyz_dps[2];
-    	double forwardThrottle = joystick.getRawAxis(1) * -1.0;
+    	double forwardThrottle = xboxController.getRawAxis(1) * -1.0;
 		double maxThrot = MaxCorrection(forwardThrottle, kMaxCorrectionRatio);
     	
-    	System.out.println("get raw axis 1 = " + joystick.getRawAxis(1));
+    	System.out.println("get raw axis 1 = " + xboxController.getRawAxis(1));
     	System.out.println("forwardThrottle = " + forwardThrottle);
     	
     	//double turnThrottle = joystick.getRawAxis(4) * -1.0;
     	
 		double turnThrottle = (target - currentAngle) * kPgain - (currentAngularRate) * kDgain;
 
-    	System.out.println("get raw axis 4 = " + joystick.getRawAxis(4));
+    	System.out.println("get raw axis 4 = " + xboxController.getRawAxis(4));
     	System.out.println("turnThrottle = " + turnThrottle);
 
     	

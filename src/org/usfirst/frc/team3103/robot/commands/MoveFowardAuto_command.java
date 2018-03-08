@@ -1,15 +1,22 @@
 package org.usfirst.frc.team3103.robot.commands;
 
+import org.usfirst.frc.team3103.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class MoveFowardAuto_command extends Command {
+public class MoveFowardAuto_command extends CommandGroup {
 
     public MoveFowardAuto_command() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	
+    	requires(Robot.mainDrive);
+    	
+    	//Robot.mainDrive.
     }
 
     // Called just before this Command runs the first time

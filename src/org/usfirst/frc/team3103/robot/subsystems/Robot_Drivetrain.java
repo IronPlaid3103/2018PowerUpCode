@@ -4,11 +4,13 @@ import org.usfirst.frc.team3103.robot.RobotMap;
 import org.usfirst.frc.team3103.robot.commands.arcade_Drive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.sensors.PigeonIMU;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.MotorSafety;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -23,7 +25,8 @@ public class Robot_Drivetrain extends Subsystem {
 	WPI_TalonSRX blDrive = new WPI_TalonSRX(RobotMap.blMotor);
 	WPI_TalonSRX brDrive = new WPI_TalonSRX(RobotMap.brMotor);
 	
-	PigeonIMU gyro = new PigeonIMU(flDrive);
+	PigeonIMU gyro = new PigeonIMU(frDrive);
+	
 	
 	DifferentialDrive WCD = new DifferentialDrive(flDrive, frDrive);
 	
@@ -41,6 +44,8 @@ public class Robot_Drivetrain extends Subsystem {
 		//flDrive.follow(blDrive);
 		
 		//gyro.setFusedHeading(0.0, 5000);
+		flDrive.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+		frDrive.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 		
     	WCD.setSafetyEnabled(false);
 	}
@@ -60,7 +65,10 @@ public class Robot_Drivetrain extends Subsystem {
     	double testAngle = gyro.getAbsoluteCompassHeading();
 		System.out.println("Current heading: " + testAngle);		
 		
-    	WCD.arcadeDrive(xboxController.getRawAxis(1), xboxController.getRawAxis(4), false);
+	    System.out.println("encoder value = " + rpm);
+
+		
+    	WCD.arcadeDrive(-xboxController.getRawAxis(1), xboxController.getRawAxis(4), false);
     }
     
     public void forward(double time) {
@@ -72,10 +80,18 @@ public class Robot_Drivetrain extends Subsystem {
     	frDrive.set(right);
     }
     
+    double rpm = FeedbackDevice.CTRE_MagEncoder_Relative.value;
+    
+    
+    public void forwardAuto(int targetDistance) {
+    	Timer timer = new Timer();
+    	timer.start();
+    	
+    }
    
     
     double kPgain = 0.04;
-    double kDgain = 0;
+    double kDgain = 5;
     double kMaxCorrectionRatio = 0.30;
     double targetAngle = 0;
     

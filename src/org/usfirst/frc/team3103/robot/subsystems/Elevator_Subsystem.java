@@ -33,14 +33,22 @@ public class Elevator_Subsystem extends Subsystem {
      * The method makes the elevator go up 
      */
     public void up() {
-    	elevatorMotor1.set(0.75);	
+    	elevatorMotor1.set(0.25);	
     }
     
     /*
      * The method makes the elevator go down 
      */
     public void down() {
-    	elevatorMotor1.set(-0.75);
+    	elevatorMotor1.set(-0.25);
+    }
+    
+    public void upSwitch() {
+    	
+    }
+    
+    public void upScale() {
+    	
     }
     
 }

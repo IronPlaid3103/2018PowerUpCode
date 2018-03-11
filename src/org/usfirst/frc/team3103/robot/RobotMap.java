@@ -28,8 +28,8 @@ public class RobotMap {
 	public static int wMotor1 = 12;
 	public static int wMotor2 = 13;
 	
-	public static int elevatorMotor1 = 30;
-	public static int elevatorMotor2 = 31;
+	public static int elevatorMotor1 = 5;
+	public static int elevatorMotor2 = 6;
 	
 	public static int boxCatcherRoller1 = 20;
 	//public static int actuatingBoxCatcherMotor = 21;

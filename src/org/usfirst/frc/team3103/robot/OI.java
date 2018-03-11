@@ -68,12 +68,17 @@ public class OI {
 			new deliverBox_command();
 		}
 		
-		if (driveControl.getTriggerAxis(Hand.kRight) <= 1) {
+		//if (driveControl.getTriggerAxis(Hand.kRight) <= 1) {
+		if (driveControl.getAButtonPressed()) {
 			new elevatorUp_command();
 		}
 		
 		if (driveControl.getTriggerAxis(Hand.kLeft) <= 1) {
 			new elevatorDown_command();
+		}
+		
+		if (driveControl.getBButtonPressed()) {
+			new turnAngle_command(45);
 		}
 		
 	}

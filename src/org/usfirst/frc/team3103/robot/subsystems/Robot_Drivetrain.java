@@ -25,17 +25,17 @@ public class Robot_Drivetrain extends Subsystem {
 	WPI_TalonSRX blDrive = new WPI_TalonSRX(RobotMap.blMotor);
 	WPI_TalonSRX brDrive = new WPI_TalonSRX(RobotMap.brMotor);
 	
-	PigeonIMU gyro = new PigeonIMU(frDrive);
+	PigeonIMU gyro = new PigeonIMU(blDrive);
 	
 	
 	DifferentialDrive WCD = new DifferentialDrive(flDrive, frDrive);
 	
 	public void InitializeDrive() {
 		//Inversion
-		frDrive.setInverted(false); //right
-		flDrive.setInverted(false); //left
-		brDrive.setInverted(false); //right
-		blDrive.setInverted(false); //left 
+		frDrive.setInverted(false); //2 front right
+		flDrive.setInverted(false); //1 front left
+		brDrive.setInverted(false); // 3 back left
+		blDrive.setInverted(false); //4 back right
 		//Follow
 		blDrive.follow(flDrive);
 		brDrive.follow(frDrive);
@@ -60,7 +60,7 @@ public class Robot_Drivetrain extends Subsystem {
     }
         
     
-    public void teleopDrive(XboxController xboxController) {
+    public void teleopDrive(Joystick joystick) {
   //  	double testAngle  = gyro.getFusedHeading();
     	double testAngle = gyro.getAbsoluteCompassHeading();
 		System.out.println("Current heading: " + testAngle);		
@@ -68,12 +68,9 @@ public class Robot_Drivetrain extends Subsystem {
 	    System.out.println("encoder value = " + rpm);
 
 		
-    	WCD.arcadeDrive(-xboxController.getRawAxis(1), xboxController.getRawAxis(4), false);
+    	WCD.arcadeDrive(-joystick.getRawAxis(1), joystick.getRawAxis(4), false);
     }
     
-    public void forward(double time) {
-    	
-    }
     
     public void random(double left, double right) {
     	flDrive.set(left);
@@ -85,13 +82,23 @@ public class Robot_Drivetrain extends Subsystem {
     
     public void forwardAuto(int targetDistance) {
     	Timer timer = new Timer();
+    	timer.reset();
     	timer.start();
-    	
+    	double currentTime = timer.get();
+    	double currentDistance = rpm * currentTime / 60 * 6 * Math.PI;
+    	if (currentDistance < targetDistance) {
+    		flDrive.set(1);
+    		frDrive.set(1);
+    	}
+    	else if (currentDistance >= targetDistance) {
+    		flDrive.set(0);
+    		frDrive.set(0);
+    	}
     }
    
     
     double kPgain = 0.04;
-    double kDgain = 5;
+    double kDgain = 0;  //was 5 before, might e4xplain erratic movement
     double kMaxCorrectionRatio = 0.30;
     double targetAngle = 0;
     
@@ -137,7 +144,7 @@ public class Robot_Drivetrain extends Subsystem {
 	}
 		
     
-    public void turnToTargetAngle(double target, XboxController xboxController) {
+    public void turnToTargetAngle(double target, Joystick joystick) {
     	System.out.println("turntotargetangle - test");
     	
     	gyro.getYawPitchRoll(ypr);
@@ -147,17 +154,17 @@ public class Robot_Drivetrain extends Subsystem {
     	System.out.println("current angle = " + currentAngle);
     	gyro.getRawGyro(xyz_dps);
         double currentAngularRate = xyz_dps[2];
-    	double forwardThrottle = xboxController.getRawAxis(1) * -1.0;
+    	double forwardThrottle = joystick.getRawAxis(1) * -1.0;
 		double maxThrot = MaxCorrection(forwardThrottle, kMaxCorrectionRatio);
     	
-    	System.out.println("get raw axis 1 = " + xboxController.getRawAxis(1));
+    	System.out.println("get raw axis 1 = " + joystick.getRawAxis(1));
     	System.out.println("forwardThrottle = " + forwardThrottle);
     	
     	//double turnThrottle = joystick.getRawAxis(4) * -1.0;
     	
 		double turnThrottle = (target - currentAngle) * kPgain - (currentAngularRate) * kDgain;
 
-    	System.out.println("get raw axis 4 = " + xboxController.getRawAxis(4));
+    	System.out.println("get raw axis 4 = " + joystick.getRawAxis(4));
     	System.out.println("turnThrottle = " + turnThrottle);
 
     	

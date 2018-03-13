@@ -22,14 +22,14 @@ public class RobotMap {
 	//Can Devices
 	public static int flMotor = 1;
 	public static int frMotor = 2;
-	public static int brMotor = 3;
-	public static int blMotor = 4;
+	public static int blMotor = 3;
+	public static int brMotor = 4;
 	
-	public static int wMotor1 = 12;
-	public static int wMotor2 = 13;
+	//public static int wMotor1 = 12;
+	//public static int wMotor2 = 13;
 	
-	public static int elevatorMotor1 = 5;
-	public static int elevatorMotor2 = 6;
+	public static int elevatorMotor1 = 11;
+	public static int elevatorMotor2 = 12;
 	
 	public static int boxCatcherRoller1 = 20;
 	//public static int actuatingBoxCatcherMotor = 21;

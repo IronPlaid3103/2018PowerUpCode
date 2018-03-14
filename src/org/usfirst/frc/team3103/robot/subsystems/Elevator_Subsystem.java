@@ -42,12 +42,14 @@ public class Elevator_Subsystem extends Subsystem {
      */
     public void up(Joystick joystick) {
     	//elevatorMotor1.set(joystick.getRawAxis(3));
-    	elevatorMotor1.set(ControlMode.PercentOutput, joystick.getRawAxis(3));
+    	//elevatorMotor1.set(ControlMode.PercentOutput, joystick.getRawAxis(3));
+    	elevatorMotor1.set(0.9);
     }
     
     public void down(Joystick joystick) {
     	//elevatorMotor1.set(joystick.getRawAxis(2)*-1);
-      	elevatorMotor1.set(ControlMode.PercentOutput, joystick.getRawAxis(3)*-1);
+      	//elevatorMotor1.set(ControlMode.PercentOutput, joystick.getRawAxis(3)*-1);
+    	elevatorMotor1.set(-0.9);
     }
     
     public void stop() {
@@ -61,7 +63,7 @@ public class Elevator_Subsystem extends Subsystem {
     	timer.reset();
     	timer.start();
     	double currentTime = timer.get();
-    	double currentDistance = rpm * currentTime / 60 * 6 * Math.PI;
+    	double currentDistance = rpm * currentTime / 60;
     	if (currentDistance < 9) {
     		elevatorMotor1.set(1);
     	}
@@ -75,7 +77,7 @@ public class Elevator_Subsystem extends Subsystem {
     	timer.reset();
     	timer.start();
     	double currentTime = timer.get();
-    	double currentDistance = rpm * currentTime / 60 * 6 * Math.PI;
+    	double currentDistance = rpm * currentTime / 60;
     	if (currentDistance < 72) {
     		elevatorMotor1.set(1);
     	}

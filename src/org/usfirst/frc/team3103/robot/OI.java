@@ -41,9 +41,10 @@ public class OI {
 		Button turnAngle = new JoystickButton(driveControl, 2);
 		//Button intake = new JoystickButton(driveControl, 3); // button x
 		//Button outtake = new JoystickButton(driveControl, 4); // button y 
-		//Button eleUp = new JoystickButton(driveControl, 5); // left bumper
-		//Button eleDown = new JoystickButton(driveControl, 6); // right bumper 
-		
+		Button eleUp = new JoystickButton(driveControl, 5); // left bumper
+		Button eleDown = new JoystickButton(driveControl, 6); // right bumper 
+		Button intake = new JoystickButton(driveControl, 1); //a button
+		Button outtake = new JoystickButton(driveControl, 3); //x button
 		//driveControl.getRawButton(5);
 
     	/* if (buttonPressed) {
@@ -58,9 +59,10 @@ public class OI {
 		
 		turnAngle.whenPressed(new turnAngle_command(45));
 		
-		//eleUp.whileHeld(new elevatorUp_command());
-		//eleDown.whileHeld(new elevatorDown_command());
-		
+		eleUp.whileHeld(new elevatorUp_command());
+		eleDown.whileHeld(new elevatorDown_command());
+		intake.whileHeld(new getBox_command());
+		outtake.whileHeld(new deliverBox_command());
 		//driveControl new turnAngle_command();
 		
 		//limelight.whenPressed(new AutoAim());

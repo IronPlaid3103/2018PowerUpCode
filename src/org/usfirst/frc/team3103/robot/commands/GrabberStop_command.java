@@ -3,33 +3,17 @@ package org.usfirst.frc.team3103.robot.commands;
 import org.usfirst.frc.team3103.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class MoveForwardAuto_command extends CommandGroup {
+public class GrabberStop_command extends Command {
 
-    public MoveForwardAuto_command(int position) {
+    public GrabberStop_command() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	
-    	requires(Robot.mainDrive);
-    	
-    	switch (position) {
-    	case 1:
-    		addSequential(new MoveForward_command(120));
-    		addSequential(new ElevatorUpScale_command());
-    	case 2:
-    		addSequential(new turnAngle_command(30.96));
-    		addSequential(new MoveForward_command(130));
-    		addSequential(new ElevatorUpScale_command());
-    	case 3:
-    		addSequential(new MoveForward_command(120));
-    		addSequential(new ElevatorUpScale_command());
-    	}
-    		
-    	
+    	requires(Robot.gripper);
     }
 
     // Called just before this Command runs the first time
@@ -38,6 +22,7 @@ public class MoveForwardAuto_command extends CommandGroup {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.gripper.stop();
     }
 
     // Make this return true when this Command no longer needs to run execute()

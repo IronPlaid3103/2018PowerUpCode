@@ -33,7 +33,7 @@ public class RobotMap {
 	
 	public static int boxCatcherRoller1 = 20;
 	//public static int actuatingBoxCatcherMotor = 21;
-	public static int boxCatcherRoller2 = 22;
+	public static int boxCatcherRoller2 = 21;
 
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:

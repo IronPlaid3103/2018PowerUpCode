@@ -25,7 +25,7 @@ public class Robot_Drivetrain extends Subsystem {
 	WPI_TalonSRX blDrive = new WPI_TalonSRX(RobotMap.blMotor);
 	WPI_TalonSRX brDrive = new WPI_TalonSRX(RobotMap.brMotor);
 	
-	PigeonIMU gyro = new PigeonIMU(blDrive);
+	PigeonIMU gyro = new PigeonIMU(brDrive);
 	
 	
 	DifferentialDrive WCD = new DifferentialDrive(flDrive, frDrive);
@@ -162,7 +162,7 @@ public class Robot_Drivetrain extends Subsystem {
     	
     	//double turnThrottle = joystick.getRawAxis(4) * -1.0;
     	
-		double turnThrottle = (target - currentAngle) * kPgain - (currentAngularRate) * kDgain;
+		double turnThrottle = (target - currentAngle) * kPgain - (currentAngularRate); //removed kD gain
 
     	System.out.println("get raw axis 4 = " + joystick.getRawAxis(4));
     	System.out.println("turnThrottle = " + turnThrottle);

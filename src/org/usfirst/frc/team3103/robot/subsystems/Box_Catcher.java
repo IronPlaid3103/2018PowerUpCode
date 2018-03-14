@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3103.robot.subsystems;
 
 import org.usfirst.frc.team3103.robot.RobotMap;
+import org.usfirst.frc.team3103.robot.commands.GrabberStop_command;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -15,7 +16,7 @@ public class Box_Catcher extends Subsystem {
 	WPI_TalonSRX catcher1 = new WPI_TalonSRX(RobotMap.boxCatcherRoller1);
 	WPI_TalonSRX catcher2 = new WPI_TalonSRX(RobotMap.boxCatcherRoller2);
 	
-	private Solenoid piston = new Solenoid(1, 1);
+	Solenoid piston = new Solenoid(21, 0);
 	
 	public void Box_CatcherInit() {
 		//inversion
@@ -32,7 +33,7 @@ public class Box_Catcher extends Subsystem {
     public void initDefaultCommand() {
     	// actuating stuff forwards and backwards
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new GrabberStop_command());
     }
     	
     public void open_Catcher() {
@@ -43,6 +44,11 @@ public class Box_Catcher extends Subsystem {
     	piston.set(false);
     	
     }
+    
+    public void stop() {
+    	catcher1.set(0); 
+    }
+    
     public void intake_Box() {
     	catcher1.set(1);
     	

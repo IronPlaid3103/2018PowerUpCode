@@ -7,13 +7,15 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class turnAngle_command extends Command {
+public class ElevatorUpScale_command extends Command {
 
-    public turnAngle_command(double target) {
+    public ElevatorUpScale_command() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	
-    	requires(Robot.mainDrive);
+    	requires(Robot.elevator);
+    	
+    	Robot.elevator.upScale();
     }
 
     // Called just before this Command runs the first time
@@ -21,23 +23,16 @@ public class turnAngle_command extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute(double target) {
-    	System.out.println("test turn angle");
-    	Robot.mainDrive.turnToTargetAngle(target, Robot.m_oi.getJoystickController()); 
-    	System.out.println("Yaw = " + Robot.mainDrive.getYaw());
+    protected void execute() {
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(Robot.mainDrive.getYaw() == Math.abs(45.0)) {
-    		return true;
-    	}
         return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.mainDrive.getDefaultCommand();
     }
 
     // Called when another command which requires one or more of the same

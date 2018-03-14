@@ -22,18 +22,18 @@ public class RobotMap {
 	//Can Devices
 	public static int flMotor = 1;
 	public static int frMotor = 2;
-	public static int brMotor = 3;
-	public static int blMotor = 4;
+	public static int blMotor = 3;
+	public static int brMotor = 4;
 	
-	public static int wMotor1 = 12;
-	public static int wMotor2 = 13;
+	//public static int wMotor1 = 12;
+	//public static int wMotor2 = 13;
 	
-	public static int elevatorMotor1 = 30;
-	public static int elevatorMotor2 = 31;
+	public static int elevatorMotor1 = 11;
+	public static int elevatorMotor2 = 12;
 	
 	public static int boxCatcherRoller1 = 20;
 	//public static int actuatingBoxCatcherMotor = 21;
-	public static int boxCatcherRoller2 = 22;
+	public static int boxCatcherRoller2 = 21;
 
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:

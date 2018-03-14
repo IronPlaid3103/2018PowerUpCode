@@ -4,11 +4,13 @@ import org.usfirst.frc.team3103.robot.RobotMap;
 import org.usfirst.frc.team3103.robot.commands.arcade_Drive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.sensors.PigeonIMU;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.MotorSafety;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -23,21 +25,27 @@ public class Robot_Drivetrain extends Subsystem {
 	WPI_TalonSRX blDrive = new WPI_TalonSRX(RobotMap.blMotor);
 	WPI_TalonSRX brDrive = new WPI_TalonSRX(RobotMap.brMotor);
 	
-	PigeonIMU gyro = new PigeonIMU(flDrive);
+	PigeonIMU gyro = new PigeonIMU(brDrive);
+	
 	
 	DifferentialDrive WCD = new DifferentialDrive(flDrive, frDrive);
 	
 	public void InitializeDrive() {
 		//Inversion
-		frDrive.setInverted(false); //right
-		flDrive.setInverted(false); //left
-		brDrive.setInverted(false); //right
-		blDrive.setInverted(false); //left 
+		frDrive.setInverted(false); //2 front right
+		flDrive.setInverted(false); //1 front left
+		brDrive.setInverted(false); // 3 back left
+		blDrive.setInverted(false); //4 back right
 		//Follow
 		blDrive.follow(flDrive);
 		brDrive.follow(frDrive);
 		
+		//frDrive.follow(brDrive);
+		//flDrive.follow(blDrive);
+		
 		//gyro.setFusedHeading(0.0, 5000);
+		flDrive.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+		frDrive.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 		
     	WCD.setSafetyEnabled(false);
 	}
@@ -57,18 +65,40 @@ public class Robot_Drivetrain extends Subsystem {
     	double testAngle = gyro.getAbsoluteCompassHeading();
 		System.out.println("Current heading: " + testAngle);		
 		
-    	WCD.arcadeDrive(joystick.getRawAxis(1), joystick.getRawAxis(4), false);
+	    System.out.println("encoder value = " + rpm);
+
+		
+    	WCD.arcadeDrive(-joystick.getRawAxis(1), joystick.getRawAxis(4), false);
     }
+    
     
     public void random(double left, double right) {
     	flDrive.set(left);
     	frDrive.set(right);
     }
     
+    double rpm = FeedbackDevice.CTRE_MagEncoder_Relative.value;
+    
+    
+    public void forwardAuto(int targetDistance) {
+    	Timer timer = new Timer();
+    	timer.reset();
+    	timer.start();
+    	double currentTime = timer.get();
+    	double currentDistance = rpm * currentTime / 60 * 6 * Math.PI;
+    	if (currentDistance < targetDistance) {
+    		flDrive.set(1);
+    		frDrive.set(1);
+    	}
+    	else if (currentDistance >= targetDistance) {
+    		flDrive.set(0);
+    		frDrive.set(0);
+    	}
+    }
    
     
     double kPgain = 0.04;
-    double kDgain = 0.04;
+    double kDgain = 0;  //was 5 before, might e4xplain erratic movement
     double kMaxCorrectionRatio = 0.30;
     double targetAngle = 0;
     
@@ -132,7 +162,7 @@ public class Robot_Drivetrain extends Subsystem {
     	
     	//double turnThrottle = joystick.getRawAxis(4) * -1.0;
     	
-		double turnThrottle = (target - currentAngle) * kPgain - (currentAngularRate) * kDgain;
+		double turnThrottle = (target - currentAngle) * kPgain - (currentAngularRate); //removed kD gain
 
     	System.out.println("get raw axis 4 = " + joystick.getRawAxis(4));
     	System.out.println("turnThrottle = " + turnThrottle);

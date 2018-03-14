@@ -9,6 +9,8 @@ package org.usfirst.frc.team3103.robot;
 
 import org.usfirst.frc.team3103.robot.commands.AutoAim;
 import org.usfirst.frc.team3103.robot.commands.deliverBox_command;
+import org.usfirst.frc.team3103.robot.commands.elevatorDown_command;
+import org.usfirst.frc.team3103.robot.commands.elevatorUp_command;
 import org.usfirst.frc.team3103.robot.commands.getBox_command;
 import org.usfirst.frc.team3103.robot.commands.turnAngle_command;
 
@@ -17,6 +19,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -33,11 +36,15 @@ public class OI {
 
 		//driveControl.getBumper(Hand.kRight).whenPressed(new AutoAim());
 		//boolean rightBumper = driveControl.getBumper(Hand.kLeft); 
-		Button limelight = new JoystickButton(driveControl, 1);
+		
+		//Button limelight = new JoystickButton(driveControl, 1);
 		Button turnAngle = new JoystickButton(driveControl, 2);
-		Button intake = new JoystickButton(driveControl, 5);
-		Button outtake = new JoystickButton(driveControl, 6);
-    	
+		//Button intake = new JoystickButton(driveControl, 3); // button x
+		//Button outtake = new JoystickButton(driveControl, 4); // button y 
+		Button eleUp = new JoystickButton(driveControl, 5); // left bumper
+		Button eleDown = new JoystickButton(driveControl, 6); // right bumper 
+		Button intake = new JoystickButton(driveControl, 1); //a button
+		Button outtake = new JoystickButton(driveControl, 3); //x button
 		//driveControl.getRawButton(5);
 
     	/* if (buttonPressed) {
@@ -50,12 +57,37 @@ public class OI {
 		
 		//new JoystickButton(driveControl, 6).whenPressed(new AutoAim());
 		
+		turnAngle.whenPressed(new turnAngle_command(45));
 		
-		turnAngle.whenPressed(new turnAngle_command());
-		limelight.whenPressed(new AutoAim());
+		eleUp.whileHeld(new elevatorUp_command());
+		eleDown.whileHeld(new elevatorDown_command());
 		intake.whileHeld(new getBox_command());
 		outtake.whileHeld(new deliverBox_command());
+		//driveControl new turnAngle_command();
 		
+		//limelight.whenPressed(new AutoAim());
+		/*
+		if (driveControl.getXButtonPressed()) {
+			new getBox_command();
+		}
+		
+		if (driveControl.getYButtonPressed()) {
+			new deliverBox_command();
+		}
+		
+		//if (driveControl.getTriggerAxis(Hand.kRight) <= 1) {
+		if (driveControl.getAButtonPressed()) {
+			new elevatorUp_command();
+		}
+		
+		if (driveControl.getTriggerAxis(Hand.kLeft) <= 1) {
+			new elevatorDown_command();
+		}
+		
+		if (driveControl.getBButtonPressed()) {
+			new turnAngle_command(45);
+		}
+		*/
 	}
 	
 	public Joystick getJoystickController() {

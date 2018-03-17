@@ -38,13 +38,14 @@ public class OI {
 		//boolean rightBumper = driveControl.getBumper(Hand.kLeft); 
 		
 		//Button limelight = new JoystickButton(driveControl, 1);
-		Button turnAngle = new JoystickButton(driveControl, 2);
+		//Button turnAngle = new JoystickButton(driveControl, 2);
 		//Button intake = new JoystickButton(driveControl, 3); // button x
 		//Button outtake = new JoystickButton(driveControl, 4); // button y 
 		Button eleUp = new JoystickButton(driveControl, 5); // left bumper
 		Button eleDown = new JoystickButton(driveControl, 6); // right bumper 
 		Button intake = new JoystickButton(driveControl, 1); //a button
 		Button outtake = new JoystickButton(driveControl, 3); //x button
+		Button solenoidTest = new JoystickButton(driveControl, 2); //b button(?)
 		//driveControl.getRawButton(5);
 
     	/* if (buttonPressed) {
@@ -57,12 +58,13 @@ public class OI {
 		
 		//new JoystickButton(driveControl, 6).whenPressed(new AutoAim());
 		
-		turnAngle.whenPressed(new turnAngle_command(45));
+		//turnAngle.whenPressed(new turnAngle_command(45));
 		
 		eleUp.whileHeld(new elevatorUp_command());
 		eleDown.whileHeld(new elevatorDown_command());
 		intake.whileHeld(new getBox_command());
 		outtake.whileHeld(new deliverBox_command());
+		solenoidTest.whileHeld(new SolenoidTest());
 		//driveControl new turnAngle_command();
 		
 		//limelight.whenPressed(new AutoAim());

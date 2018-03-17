@@ -7,11 +7,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class getBox_command extends Command {
+public class SolenoidTest extends Command {
 
-    public getBox_command() {
+    public SolenoidTest() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	
     	requires(Robot.gripper);
     }
 
@@ -21,7 +22,7 @@ public class getBox_command extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.gripper.intake_Box();    	
+    	Robot.gripper.open_Catcher();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -31,7 +32,7 @@ public class getBox_command extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	//Robot.gripper.close_Catcher();
+    	Robot.gripper.close_Catcher();
     }
 
     // Called when another command which requires one or more of the same

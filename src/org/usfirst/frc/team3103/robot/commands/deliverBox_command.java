@@ -17,7 +17,6 @@ public class deliverBox_command extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.gripper.open_Catcher();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -32,7 +31,6 @@ public class deliverBox_command extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.gripper.close_Catcher();
     }
 
     // Called when another command which requires one or more of the same
